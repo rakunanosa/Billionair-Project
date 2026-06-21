@@ -6,36 +6,36 @@
   justify-content: flex-end;
 }
 
+/* 共通ベース：紺 */
 .sync-btn {
   padding: 7px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
+  background: var(--navy);
+  color: var(--navy-text);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  transition: opacity 0.15s;
+  transition: background 0.15s;
 }
 
-.sync-btn:hover { opacity: 0.85; }
-
-.sync-btn--login {
-  background: #0078d4;
-  color: #fff;
+.sync-btn:hover {
+  background: var(--navy-hover);
 }
 
-.sync-btn--sync {
-  background: #16a34a;
-  color: #fff;
-}
-
+/* ログアウト（アカウント名）：ベージュグレー */
 .sync-btn--logout {
-  background: transparent;
+  background: var(--accent-light);
+  color: var(--accent-text);
   border: 1.5px solid var(--border);
-  color: var(--text);
-  max-width: 120px;
+  max-width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.sync-btn--logout:hover {
+  background: #e0dbd3;
 }
 
 .sync-status {
@@ -44,5 +44,5 @@
 }
 
 .sync-status--syncing { color: var(--text); }
-.sync-status--done { color: #16a34a; }
-.sync-status--error { color: #dc2626; }
+.sync-status--done    { color: var(--income-color); }
+.sync-status--error   { color: var(--expense-color); }

@@ -1,68 +1,55 @@
 .tx-form {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .tx-form__title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-h);
-  margin: 0;
-  letter-spacing: 0;
+  color: var(--text);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
 
 .tx-form__type-toggle {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
+/* 非アクティブ：ベージュグレー */
 .toggle-btn {
   flex: 1;
-  padding: 10px;
+  padding: 9px;
   border: 1.5px solid var(--border);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--text);
-  font-size: 14px;
+  border-radius: 7px;
+  background: var(--accent-light);
+  color: var(--accent-text);
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s;
 }
 
-.toggle-btn.active.expense {
-  background: #fee2e2;
-  border-color: #f87171;
-  color: #dc2626;
+.toggle-btn:hover {
+  background: #e0dbd3;
 }
 
-.toggle-btn.active.income {
-  background: #dcfce7;
-  border-color: #4ade80;
-  color: #16a34a;
-}
-
-@media (prefers-color-scheme: dark) {
-  .toggle-btn.active.expense {
-    background: rgba(220, 38, 38, 0.15);
-    border-color: #f87171;
-    color: #fca5a5;
-  }
-  .toggle-btn.active.income {
-    background: rgba(22, 163, 74, 0.15);
-    border-color: #4ade80;
-    color: #86efac;
-  }
+/* アクティブ：紺 */
+.toggle-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--navy-text);
 }
 
 .tx-form__fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 
   @media (max-width: 400px) {
     grid-template-columns: 1fr;
@@ -72,7 +59,7 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .field--full {
@@ -80,49 +67,47 @@
 }
 
 .field span {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text);
+  letter-spacing: 0.4px;
 }
 
 .field input,
 .field select {
-  padding: 9px 12px;
+  padding: 9px 11px;
   border: 1.5px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--bg);
   color: var(--text-h);
   font-size: 14px;
-  font-family: inherit;
   outline: none;
   transition: border-color 0.15s;
 }
 
 .field input:focus,
 .field select:focus {
-  border-color: var(--accent);
+  border-color: var(--navy);
 }
 
+.field input::placeholder {
+  color: var(--border);
+}
+
+/* 追加ボタン：紺 */
 .tx-form__submit {
-  padding: 12px;
+  padding: 11px;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 7px;
+  background: var(--navy);
+  color: var(--navy-text);
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: background 0.15s;
+  letter-spacing: 0.2px;
 }
 
 .tx-form__submit:hover {
-  opacity: 0.85;
-}
-
-.tx-form__submit.expense {
-  background: #dc2626;
-  color: #fff;
-}
-
-.tx-form__submit.income {
-  background: #16a34a;
-  color: #fff;
+  background: var(--navy-hover);
 }
