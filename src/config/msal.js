@@ -16,4 +16,11 @@ export const msalConfig = {
 
 export const loginScopes = ['Files.ReadWrite', 'User.Read']
 
-export const msalInstance = new PublicClientApplication(msalConfig)
+let _instance = null
+
+export function getMsalInstance() {
+  if (!_instance) {
+    _instance = new PublicClientApplication(msalConfig)
+  }
+  return _instance
+}

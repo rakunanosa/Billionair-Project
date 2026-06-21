@@ -2,8 +2,16 @@ import { useState } from 'react'
 import { syncToOneDrive } from '../utils/graphApi'
 import './SyncButton.css'
 
-export default function SyncButton({ account, onLogin, onLogout, getToken, unsyncedTransactions, onSynced }) {
+export default function SyncButton({ account, authReady, onLogin, onLogout, getToken, unsyncedTransactions, onSynced }) {
   const [status, setStatus] = useState('idle')
+
+  if (!authReady) {
+    return (
+      <button className="sync-btn sync-btn--login" disabled>
+        読み込み中...
+      </button>
+    )
+  }
 
   if (!account) {
     return (

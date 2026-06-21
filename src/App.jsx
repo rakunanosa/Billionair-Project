@@ -9,7 +9,7 @@ import './App.css'
 
 function App() {
   const { transactions, addTransaction, deleteTransaction, unsyncedTransactions, markSynced } = useTransactions()
-  const { account, login, logout, getToken } = useAuth()
+  const { account, authReady, login, logout, getToken } = useAuth()
   const [month, setMonth] = useState(() => new Date().toISOString().slice(0, 7))
 
   const filtered = transactions.filter(tx => tx.date.startsWith(month))
@@ -24,6 +24,7 @@ function App() {
         <div className="app-header__actions">
           <SyncButton
             account={account}
+            authReady={authReady}
             onLogin={login}
             onLogout={logout}
             getToken={getToken}

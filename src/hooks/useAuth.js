@@ -1,42 +1,45 @@
 import { useState, useEffect, useCallback } from 'react'
-import { msalInstance, loginScopes } from '../config/msal'
+import { getMsalInstance, loginScopes } from '../config/msal'
 
 export function useAuth() {
   const [account, setAccount] = useState(null)
-  const [ready, setReady] = useState(false)
+  const [authReady, setAuthReady] = useState(false)
 
   useEffect(() => {
-    msalInstance.initialize().then(() => {
-      msalInstance.handleRedirectPromise().then(response => {
+    const msal = getMsalInstance()
+    msal.initialize()
+      .then(() => msal.handleRedirectPromise())
+      .then(response => {
         if (response?.account) {
           setAccount(response.account)
         } else {
-          const accounts = msalInstance.getAllAccounts()
+          const accounts = msal.getAllAccounts()
           if (accounts.length > 0) setAccount(accounts[0])
         }
-        setReady(true)
       })
-    })
+      .catch(e => console.warn('MSAL init:', e))
+      .finally(() => setAuthReady(true))
   }, [])
 
   const login = useCallback(async () => {
-    const result = await msalInstance.loginPopup({ scopes: loginScopes })
+    const msal = getMsalInstance()
+    const result = await msal.loginPopup({ scopes: loginScopes })
     setAccount(result.account)
   }, [])
 
   const logout = useCallback(() => {
-    msalInstance.logoutPopup()
+    getMsalInstance().logoutPopup()
     setAccount(null)
   }, [])
 
   const getToken = useCallback(async () => {
     if (!account) throw new Error('ログインが必要です')
-    const result = await msalInstance.acquireTokenSilent({
+    const result = await getMsalInstance().acquireTokenSilent({
       scopes: loginScopes,
       account,
     })
     return result.accessToken
   }, [account])
 
-  return { account, ready, login, logout, getToken }
+  return { account, authReady, login, logout, getToken }
 }
