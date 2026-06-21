@@ -1,6 +1,7 @@
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
 import { useTransactions } from './hooks/useTransactions'
+import { exportToExcel } from './utils/exportExcel'
 import './App.css'
 
 function App() {
@@ -9,8 +10,18 @@ function App() {
   return (
     <div className="app-layout">
       <header className="app-header">
-        <h1 className="app-title">Pocket Ledger</h1>
-        <p className="app-subtitle">かんたん家計簿</p>
+        <div>
+          <h1 className="app-title">Pocket Ledger</h1>
+          <p className="app-subtitle">かんたん家計簿</p>
+        </div>
+        {transactions.length > 0 && (
+          <button
+            className="export-btn"
+            onClick={() => exportToExcel(transactions)}
+          >
+            Excelで出力
+          </button>
+        )}
       </header>
 
       <main className="app-main">

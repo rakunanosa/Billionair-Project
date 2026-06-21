@@ -5,8 +5,11 @@
 }
 
 .app-header {
-  padding: 20px 24px 16px;
+  padding: 16px 24px;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .app-title {
@@ -34,4 +37,21 @@
 
 .app-section-gap {
   height: 20px;
+}
+
+.export-btn {
+  padding: 8px 16px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.export-btn:hover {
+  opacity: 0.85;
 }
