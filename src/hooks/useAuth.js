@@ -23,8 +23,7 @@ export function useAuth() {
 
   const login = useCallback(async () => {
     const msal = getMsalInstance()
-    // ポップアップのリダイレクト先 = メインアプリ自身（MSALが起動済みなのでポップアップを閉じられる）
-    const popupRedirectUri = `${window.location.origin}${import.meta.env.BASE_URL}`
+    const popupRedirectUri = `${window.location.origin}${import.meta.env.BASE_URL}auth.html`
     const result = await msal.loginPopup({ scopes: loginScopes, redirectUri: popupRedirectUri })
     setAccount(result.account)
     return result.account
