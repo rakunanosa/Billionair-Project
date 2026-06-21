@@ -23,7 +23,9 @@ export function useAuth() {
 
   const login = useCallback(async () => {
     const msal = getMsalInstance()
-    const popupRedirectUri = `${window.location.origin}${import.meta.env.BASE_URL}blank.html`
+    const popupRedirectUri = import.meta.env.DEV
+      ? `${window.location.origin}/blank.html`
+      : `${window.location.origin}${import.meta.env.BASE_URL}blank.html`
     const result = await msal.loginPopup({ scopes: loginScopes, redirectUri: popupRedirectUri })
     setAccount(result.account)
     return result.account
