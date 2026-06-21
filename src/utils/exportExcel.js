@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx'
 
-export function exportToExcel(transactions) {
+export function exportToExcel(transactions, month) {
   const rows = transactions.map(tx => ({
     日付: tx.date,
     種別: tx.type === 'income' ? '収入' : '支出',
@@ -20,8 +20,9 @@ export function exportToExcel(transactions) {
   ]
 
   const wb = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(wb, ws, '家計簿')
+  const sheetName = month ? month.replace('-', '年') + '月' : '家計簿'
+  XLSX.utils.book_append_sheet(wb, ws, sheetName)
 
-  const date = new Date().toISOString().slice(0, 10)
-  XLSX.writeFile(wb, `pocket-ledger-${date}.xlsx`)
+  const filename = month ? `pocket-ledger-${month}.xlsx` : `pocket-ledger-${new Date().toISOString().slice(0, 10)}.xlsx`
+  XLSX.writeFile(wb, filename)
 }
