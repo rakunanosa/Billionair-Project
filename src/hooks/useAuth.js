@@ -25,6 +25,7 @@ export function useAuth() {
     const msal = getMsalInstance()
     const result = await msal.loginPopup({ scopes: loginScopes })
     setAccount(result.account)
+    return result.account
   }, [])
 
   const logout = useCallback(() => {
@@ -32,11 +33,12 @@ export function useAuth() {
     setAccount(null)
   }, [])
 
-  const getToken = useCallback(async () => {
-    if (!account) throw new Error('ログインが必要です')
+  const getToken = useCallback(async (overrideAccount) => {
+    const target = overrideAccount ?? account
+    if (!target) throw new Error('ログインが必要です')
     const result = await getMsalInstance().acquireTokenSilent({
       scopes: loginScopes,
-      account,
+      account: target,
     })
     return result.accessToken
   }, [account])
