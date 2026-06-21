@@ -7,8 +7,8 @@ export function useAuth() {
 
   useEffect(() => {
     const msal = getMsalInstance()
-    msal.initialize()
-      .then(() => msal.handleRedirectPromise())
+    // main.jsx で initialize() 済みなので handleRedirectPromise のみ
+    msal.handleRedirectPromise()
       .then(response => {
         if (response?.account) {
           setAccount(response.account)
@@ -17,15 +17,14 @@ export function useAuth() {
           if (accounts.length > 0) setAccount(accounts[0])
         }
       })
-      .catch(e => console.warn('MSAL init:', e))
+      .catch(e => console.warn('MSAL:', e))
       .finally(() => setAuthReady(true))
   }, [])
 
   const login = useCallback(async () => {
     const msal = getMsalInstance()
-    const popupRedirectUri = import.meta.env.DEV
-      ? `${window.location.origin}/blank.html`
-      : `${window.location.origin}${import.meta.env.BASE_URL}blank.html`
+    // ポップアップのリダイレクト先 = メインアプリ自身（MSALが起動済みなのでポップアップを閉じられる）
+    const popupRedirectUri = `${window.location.origin}${import.meta.env.BASE_URL}`
     const result = await msal.loginPopup({ scopes: loginScopes, redirectUri: popupRedirectUri })
     setAccount(result.account)
     return result.account
