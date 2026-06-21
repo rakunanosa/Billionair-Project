@@ -1,0 +1,48 @@
+.sync-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sync-btn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.sync-btn:hover { opacity: 0.85; }
+
+.sync-btn--login {
+  background: #0078d4;
+  color: #fff;
+}
+
+.sync-btn--sync {
+  background: #16a34a;
+  color: #fff;
+}
+
+.sync-btn--logout {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sync-status {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sync-status--syncing { color: var(--text); }
+.sync-status--done { color: #16a34a; }
+.sync-status--error { color: #dc2626; }
