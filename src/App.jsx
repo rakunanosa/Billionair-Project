@@ -5,7 +5,6 @@ import MonthNav from './components/MonthNav'
 import SyncButton from './components/SyncButton'
 import { useTransactions } from './hooks/useTransactions'
 import { useAuth } from './hooks/useAuth'
-import { exportToExcel } from './utils/exportExcel'
 import './App.css'
 
 function App() {
@@ -23,11 +22,6 @@ function App() {
           <p className="app-subtitle">かんたん家計簿</p>
         </div>
         <div className="app-header__actions">
-          {filtered.length > 0 && (
-            <button className="export-btn" onClick={() => exportToExcel(filtered, month)}>
-              Excelで出力
-            </button>
-          )}
           <SyncButton
             account={account}
             onLogin={login}
