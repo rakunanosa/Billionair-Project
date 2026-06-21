@@ -31,3 +31,7 @@
   margin: 0 auto;
   box-sizing: border-box;
 }
+
+.app-section-gap {
+  height: 20px;
+}

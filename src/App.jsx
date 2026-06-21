@@ -1,10 +1,10 @@
 import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
+import { useTransactions } from './hooks/useTransactions'
 import './App.css'
 
 function App() {
-  function handleAdd(tx) {
-    console.log('追加:', tx)
-  }
+  const { transactions, addTransaction, deleteTransaction } = useTransactions()
 
   return (
     <div className="app-layout">
@@ -14,7 +14,9 @@ function App() {
       </header>
 
       <main className="app-main">
-        <TransactionForm onAdd={handleAdd} />
+        <TransactionForm onAdd={addTransaction} />
+        <div className="app-section-gap" />
+        <TransactionList transactions={transactions} onDelete={deleteTransaction} />
       </main>
     </div>
   )
